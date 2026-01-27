@@ -7,27 +7,30 @@ import jakarta.validation.constraints.NotNull;
 
 public class StudyRequestdto {
 
-    @NotNull(message="Date cannot be null")
     private LocalDate date;
+
     @NotBlank(message="Topic cannot be empty")
     private String topic;
 
-    private int hours;
-    private String notes;
-
-    @NotBlank(message="category cannot be empty")
+    @NotBlank(message="Category cannot be empty")
     private String category;
 
-    @NotNull(message="User Id cannot be null")
-    private Long userId;
+    @NotNull
+    private Double hours;
 
-    public StudyRequestdto(String category, LocalDate date, int hours, String topic,Long userId,String notes) {
+    @NotBlank(message="Notes cannot be empty")
+    private String notes;
+
+
+    public StudyRequestdto(String category, LocalDate date, Double hours, String notes, String topic) {
         this.category = category;
         this.date = date;
         this.hours = hours;
         this.notes = notes;
         this.topic = topic;
-        this.userId = userId;
+    }
+
+    public StudyRequestdto() {
     }
 
     public LocalDate getDate() {
@@ -46,11 +49,19 @@ public class StudyRequestdto {
         this.topic = topic;
     }
 
-    public int getHours() {
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public Double getHours() {
         return hours;
     }
 
-    public void setHours(int hours) {
+    public void setHours(Double hours) {
         this.hours = hours;
     }
 
@@ -62,21 +73,9 @@ public class StudyRequestdto {
         this.notes = notes;
     }
 
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
     
-    
+
+
+
+
 }

@@ -16,13 +16,22 @@ import com.example.backend.dto.StudyRequestdto;
 import com.example.backend.dto.StudyResponsedto;
 import com.example.backend.service.StudyLogService;
 
-import jakarta.validation.Valid;
 
 import java.util.*;
 
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.backend.dto.DailySummaryDto;
+import com.example.backend.dto.DashBoardDto;
+import com.example.backend.dto.DaySummaryDto;
+import com.example.backend.dto.MonthlySummaryDto;
+import com.example.backend.dto.StreakDto;
 import com.example.backend.dto.WeeklySummaryDto;
+import com.example.backend.service.DashService;
+import com.example.backend.service.StreakService;
+import com.example.backend.service.SummaryService;
+
+import jakarta.validation.Valid;
 
 
 
@@ -31,9 +40,17 @@ import com.example.backend.dto.WeeklySummaryDto;
 public class StudyLogController {
 
     private StudyLogService sls;
+    private SummaryService summary;
+    private StreakService streak;
+    private DashService dash;
 
-    public StudyLogController(StudyLogService sls) {
+    
+
+    public StudyLogController(DashService dash, StudyLogService sls, StreakService streak, SummaryService summary) {
+        this.dash = dash;
         this.sls = sls;
+        this.streak = streak;
+        this.summary = summary;
     }
 
     @PostMapping()
@@ -47,8 +64,8 @@ public class StudyLogController {
     }
 
     @GetMapping("/date")
-    public ResponseEntity<List<StudyResponsedto>> getByidDate(@RequestParam Long userId,@RequestParam @DateTimeFormat(iso=DateTimeFormat.ISO.DATE) LocalDate date) {
-        return ResponseEntity.ok(sls.getByDate(userId, date));
+    public ResponseEntity<List<StudyResponsedto>> getByidDate(@RequestParam @DateTimeFormat(iso=DateTimeFormat.ISO.DATE) LocalDate date) {
+        return ResponseEntity.ok(sls.getByDate(date));
     }
 
     @GetMapping("/category/{category}")
@@ -56,15 +73,42 @@ public class StudyLogController {
         return ResponseEntity.ok(sls.searchByCategory(category));
     }
 
-    @GetMapping("/user/{userId}")
-    public ResponseEntity<List<StudyResponsedto>> findByUser(@PathVariable Long userId) {
-        return ResponseEntity.ok(sls.findByuser(userId));
+    @GetMapping("/user")
+    public ResponseEntity<List<StudyResponsedto>> findByUser() {
+        return ResponseEntity.ok(sls.findByuser());
     }
 
-    @GetMapping("/weekSummary/{userId}/{date}")
-    public ResponseEntity<WeeklySummaryDto> findByUser(@PathVariable Long userId,@PathVariable @DateTimeFormat(iso=DateTimeFormat.ISO.DATE) LocalDate date) {
-        return ResponseEntity.ok(sls.summary(userId, date));
+    @GetMapping("/weekSummary")
+    public ResponseEntity<WeeklySummaryDto> findByUser(@RequestParam @DateTimeFormat(iso=DateTimeFormat.ISO.DATE) LocalDate date) {
+        return ResponseEntity.ok(summary.summary(date));
     }
+
+    @GetMapping("/day")
+    public ResponseEntity<DaySummaryDto> getDayWise(@RequestParam @DateTimeFormat(iso=DateTimeFormat.ISO.DATE) LocalDate date) {
+        return ResponseEntity.status(200).body(summary.dayWise(date));
+    }
+
+    @GetMapping("/daySummary")
+    public ResponseEntity<DailySummaryDto> getDaySummary(@RequestParam @DateTimeFormat(iso=DateTimeFormat.ISO.DATE) LocalDate date) {
+        return ResponseEntity.status(200).body(summary.dailySummary(date));
+    }
+
+    @GetMapping("/streak")
+    public ResponseEntity<StreakDto> getStreak() {
+        return ResponseEntity.status(200).body(streak.getStreak());
+    }
+
+    @GetMapping("/monthlySummary")
+    public ResponseEntity<MonthlySummaryDto> getMonthlySummary(@RequestParam int month,@RequestParam int year) {
+        return ResponseEntity.status(200).body(summary.getMonthlySummary(year, month));
+    }
+
+    @GetMapping("/dash")
+    public ResponseEntity<DashBoardDto> getDash() {
+        System.out.println("dash");
+        return ResponseEntity.status(200).body(dash.dash());
+    }
+
 
     
     

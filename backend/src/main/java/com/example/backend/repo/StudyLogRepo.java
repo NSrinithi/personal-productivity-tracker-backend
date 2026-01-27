@@ -15,7 +15,7 @@ import java.time.LocalDate;
 public interface  StudyLogRepo extends JpaRepository<StudyLog, Long>{
     List<StudyLog> findByUserIdAndDate(Long userId,LocalDate date);
     List<StudyLog> findByCategoryContaining(String category);
-    List<StudyLog> findByUserId(Long userId);
+    
     List<StudyLog> findByUserIdAndDateBetween(Long userId,LocalDate start,LocalDate End);
-
+    List<StudyLog> findByUserId(Long userId);
 }

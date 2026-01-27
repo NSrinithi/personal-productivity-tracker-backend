@@ -1,27 +1,30 @@
 package com.example.backend.dto;
 
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Size;
 
 public class UserRequestdto {
 
-    @NotBlank(message="Name cannot be empty")
-    private String name;
+    @Email
+    private String email;
 
-    @Size(min=6,message="Password should have minimum 6 characters")
-    private String password;
+    @Size(min=8)
+    private String password;   
 
-    public UserRequestdto(String name, String password) {
-        this.name = name;
+    public UserRequestdto(String email, String password) {
+        this.email = email;
         this.password = password;
     }
 
-    public String getName() {
-        return name;
+    public UserRequestdto() {
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPassword() {
@@ -32,5 +35,5 @@ public class UserRequestdto {
         this.password = password;
     }
 
-    
+
 }

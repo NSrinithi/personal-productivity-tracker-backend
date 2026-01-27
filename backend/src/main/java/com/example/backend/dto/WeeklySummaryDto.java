@@ -1,75 +1,85 @@
 package com.example.backend.dto;
-import java.util.Map;
+
 import java.time.LocalDate;
+import java.util.Map;
 
 public class WeeklySummaryDto {
-    private Long userId;
-    private LocalDate weekStart;
-    private LocalDate weekEnd;
-    private int totalHoursStudied;
-    private int studiedDays;
-    private int missedDays;
-    private Map<String,Integer> category;
 
-    
+    private LocalDate WeekStart;
 
-    public WeeklySummaryDto(){
+    private LocalDate WeekEnd;
 
-    }
+    private int StudiedDays;
 
-    public WeeklySummaryDto(Map<String, Integer> category, int missedDays, int studiedDays, int totalHoursStudied, Long userId, LocalDate weekEnd, LocalDate weekStart) {
+    private int MissedDays;
+
+    private Double TotalHoursStudied;
+
+    private Map<String,Double> category;
+
+    public WeeklySummaryDto(int MissedDays, int StudiedDays, Double TotalHoursStudied, LocalDate WeekEnd, LocalDate WeekStart, Map<String, Double> category) {
+        this.MissedDays = MissedDays;
+        this.StudiedDays = StudiedDays;
+        this.TotalHoursStudied = TotalHoursStudied;
+        this.WeekEnd = WeekEnd;
+        this.WeekStart = WeekStart;
         this.category = category;
-        this.missedDays = missedDays;
-        this.studiedDays = studiedDays;
-        this.totalHoursStudied = totalHoursStudied;
-        this.userId = userId;
-        this.weekEnd = weekEnd;
-        this.weekStart = weekStart;
     }
 
-    public Long getUserId() {
-        return userId;
+    public WeeklySummaryDto() {
     }
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
+
+
     public LocalDate getWeekStart() {
-        return weekStart;
-    }
-    public void setWeekStart(LocalDate weekStart) {
-        this.weekStart = weekStart;
-    }
-    public LocalDate getWeekEnd() {
-        return weekEnd;
-    }
-    public void setWeekEnd(LocalDate weekEnd) {
-        this.weekEnd = weekEnd;
-    }
-    public int getTotalHoursStudied() {
-        return totalHoursStudied;
-    }
-    public void setTotalHoursStudied(int totalHoursStudied) {
-        this.totalHoursStudied = totalHoursStudied;
-    }
-    public int getStudiedDays() {
-        return studiedDays;
-    }
-    public void setStudiedDays(int studiedDays) {
-        this.studiedDays = studiedDays;
-    }
-    public int getMissedDays() {
-        return missedDays;
-    }
-    public void setMissedDays(int missedDays) {
-        this.missedDays = missedDays;
+        return WeekStart;
     }
 
-    public Map<String, Integer> getCategory() {
+    public void setWeekStart(LocalDate WeekStart) {
+        this.WeekStart = WeekStart;
+    }
+
+    public LocalDate getWeekEnd() {
+        return WeekEnd;
+    }
+
+    public void setWeekEnd(LocalDate WeekEnd) {
+        this.WeekEnd = WeekEnd;
+    }
+
+    public int getStudiedDays() {
+        return StudiedDays;
+    }
+
+    public void setStudiedDays(int StudiedDays) {
+        this.StudiedDays = StudiedDays;
+    }
+
+    public int getMissedDays() {
+        return MissedDays;
+    }
+
+    public void setMissedDays(int MissedDays) {
+        this.MissedDays = MissedDays;
+    }
+
+    public Double getTotalHoursStudied() {
+        return TotalHoursStudied;
+    }
+
+    public void setTotalHoursStudied(Double TotalHoursStudied) {
+        this.TotalHoursStudied = TotalHoursStudied;
+    }
+
+    public Map<String, Double> getCategory() {
         return category;
     }
 
-    public void setCategory(Map<String, Integer> category) {
+    public void setCategory(Map<String, Double> category) {
         this.category = category;
     }
+
     
+
+    
+
 }

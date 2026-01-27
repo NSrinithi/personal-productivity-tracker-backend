@@ -10,11 +10,11 @@ import com.example.backend.dto.UserRequestdto;
 import com.example.backend.dto.UserResponsedto;
 import com.example.backend.service.UserService;
 
-import jakarta.validation.Valid;
+// import jakarta.validation.Valid;
 
 
 @RestController
-@RequestMapping("user")
+@RequestMapping("/user")
 public class UserController {
 
     private UserService us;
@@ -23,8 +23,20 @@ public class UserController {
         this.us = us;
     }
 
-    @PostMapping()
-    public ResponseEntity<UserResponsedto> add(@Valid @RequestBody UserRequestdto u) {
-        return ResponseEntity.status(201).body(us.addUser(u));
+    @PostMapping("/register")
+    public ResponseEntity<UserResponsedto> add(@RequestBody UserRequestdto u) {
+        return ResponseEntity.status(200).body(us.addUser(u));
     }
+
+    @PostMapping("/login")
+    public ResponseEntity<String> login(@RequestBody UserRequestdto u) {
+        try{
+            return ResponseEntity.status(200).body(us.login(u));
+        }
+        catch(Exception e){
+            return ResponseEntity.status(401).body("Login failed");
+        }
+        
+    }
+    
 }

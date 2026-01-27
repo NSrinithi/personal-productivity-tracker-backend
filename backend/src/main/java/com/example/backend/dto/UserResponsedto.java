@@ -3,28 +3,31 @@ package com.example.backend.dto;
 public class UserResponsedto {
     private Long id;
 
-    private String name;
+    private String email;
 
-    public UserResponsedto(long id, String name) {
+    public UserResponsedto(String email, Long id) {
+        this.email = email;
         this.id = id;
-        this.name = name;
     }
 
-    public long getId() {
+    public UserResponsedto() {
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getEmail() {
+        return email;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    
+
 }

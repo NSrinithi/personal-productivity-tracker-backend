@@ -16,7 +16,7 @@ public class StudyLog {
     private Long id;
 
     private String topic;
-    private int hours;
+    private double hours;
     private String notes;
     private LocalDate date;
     private String category;
@@ -25,7 +25,7 @@ public class StudyLog {
     @JoinColumn(name="user_id")
     private User user;
 
-    public StudyLog(String category, LocalDate date, int hours, Long id, String notes, String topic, User user) {
+    public StudyLog(String category, LocalDate date, double hours, Long id, String notes, String topic, User user) {
         this.category = category;
         this.date = date;
         this.hours = hours;
@@ -55,11 +55,11 @@ public class StudyLog {
         this.topic = topic;
     }
 
-    public int getHours() {
+    public double getHours() {
         return hours;
     }
 
-    public void setHours(int hours) {
+    public void setHours(double hours) {
         this.hours = hours;
     }
 
