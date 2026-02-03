@@ -1,0 +1,90 @@
+/* Page background */
+.loginContainer {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Card */
+.loginCard {
+    width: 360px;
+    padding: 32px;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+/* Heading */
+.loginCard h1 {
+    text-align: center;
+    margin-bottom: 24px;
+    color: #203a43;
+    font-weight: 600;
+}
+
+/* Inputs */
+.loginCard input {
+    margin-bottom: 16px;
+    padding: 12px 14px;
+    font-size: 14px;
+    border: 1px solid #dcdcdc;
+    border-radius: 6px;
+    outline: none;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.loginCard input:focus {
+    border-color: #2c5364;
+    box-shadow: 0 0 0 2px rgba(44, 83, 100, 0.15);
+}
+
+/* Button */
+.loginCard button {
+    margin-top: 8px;
+    padding: 12px;
+    background: #203a43;
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 500;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s, box-shadow 0.2s;
+}
+
+.loginCard button:hover {
+    background: #2c5364;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+.loginCard button:active {
+    transform: translateY(0);
+    box-shadow: none;
+}
+
+/* Register text */
+.loginCard p {
+    margin-top: 18px;
+    text-align: center;
+    font-size: 14px;
+    color: #555;
+}
+
+/* Register link */
+.loginCard p a {
+    color: #203a43;
+    font-weight: 500;
+    text-decoration: none;
+    margin-left: 4px;
+}
+
+.loginCard p a:hover {
+    text-decoration: underline;
+}

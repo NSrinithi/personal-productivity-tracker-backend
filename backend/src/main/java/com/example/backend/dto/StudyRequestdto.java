@@ -4,9 +4,12 @@ import java.time.LocalDate;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PastOrPresent;
+import jakarta.validation.constraints.PositiveOrZero;
 
 public class StudyRequestdto {
 
+    @PastOrPresent(message="Date cannot be after the date of today")
     private LocalDate date;
 
     @NotBlank(message="Topic cannot be empty")
@@ -15,10 +18,9 @@ public class StudyRequestdto {
     @NotBlank(message="Category cannot be empty")
     private String category;
 
-    @NotNull
+    @PositiveOrZero(message="Hours cannot be negative")
     private Double hours;
-
-    @NotBlank(message="Notes cannot be empty")
+    
     private String notes;
 
 

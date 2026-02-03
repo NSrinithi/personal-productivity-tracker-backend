@@ -1,0 +1,71 @@
+.studyFormContainer {
+    min-height: 100vh;
+    background: #f4f7fb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.studyFormCard {
+    margin: 20px;
+    width: 350px;
+    background: #ffffff;
+    padding: 50px;
+    border-radius: 14px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+}
+
+.studyFormCard h1 {
+    text-align: center;
+    margin-bottom: 24px;
+    color: #203a43;
+    font-weight: 600;
+}
+
+/* Inputs */
+.studyFormCard input {
+    width: 100%;
+    padding: 12px 14px;
+    margin-bottom: 16px;
+    font-size: 14px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    outline: none;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.studyFormCard input:focus {
+    border-color: #203a43;
+    box-shadow: 0 0 0 2px rgba(32, 58, 67, 0.15);
+}
+
+/* Button */
+.studyFormCard button {
+    width: 100%;
+    padding: 12px;
+    margin: 15px;
+    background: #203a43;
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 500;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.studyFormCard button:hover {
+    background: #2c5364;
+    transform: translateY(-1px);
+}
+
+.studyFormCard button:active {
+    transform: translateY(0);
+}
+
+.errorText {
+  color: red;
+  font-size: 12px;
+  margin-top: 4px;
+}

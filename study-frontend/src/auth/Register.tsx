@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom";
-
+import "../css/Register.css";
 function Register(){
     const[email,setEmail]=useState("");
     const[password,setPassword]=useState("");
@@ -26,13 +26,13 @@ function Register(){
     }
 
     return(
-        <div>
+        <div className="registerContainer">
+            <div className="registerCard">
             <h1>Register</h1>
             <input type="email" placeholder="Enter Email" value={email}  onChange={(e)=>setEmail(e.target.value)}/>
-            <br />
             <input type="password" placeholder="Enter Password" value={password} onChange={(e)=>setPassword(e.target.value)} />
-            <br />
             <button onClick={handleRequest}>Register</button>
+            </div>
         </div>
     )
 }

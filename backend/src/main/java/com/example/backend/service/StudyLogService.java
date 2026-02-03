@@ -24,6 +24,7 @@ import com.example.backend.dto.WeeklySnapDto;
 import com.example.backend.dto.WeeklySummaryDto;
 import com.example.backend.entity.StudyLog;
 import com.example.backend.entity.User;
+import com.example.backend.exception.ResourceNotFound;
 import com.example.backend.repo.StudyLogRepo;
 import com.example.backend.repo.UserRepo;
 
@@ -68,7 +69,34 @@ public class StudyLogService {
     public List<StudyResponsedto> findByuser(){
         String email=SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
         User user=ur.findByEmail(email);
-        return str.findByUserId(user.getId()).stream().map(u->new StudyResponsedto(u.getId(), u.getCategory(), u.getDate(), u.getHours(),u.getTopic(), u.getNotes())).toList();
+        List<StudyLog> list=str.findByUserId(user.getId());
+        for(StudyLog s:list){
+            System.out.println(s.getTopic());
+            System.out.println("Notes:"+s.getNotes());
+        }
+        return list.stream().map(u->new StudyResponsedto(u.getId(), u.getCategory(), u.getDate(), u.getHours(), u.getNotes(),u.getTopic())).toList();
     }
 
+
+    public String deleteStudyLog(long id){
+        str.deleteById(id);
+        return "Deleted successfully";
+    }
+
+
+    public StudyResponsedto getById(Long id){
+        StudyLog s=str.findById(id).orElseThrow(()->new ResourceNotFound("Not found with id:"+id));
+        return new StudyResponsedto(s.getId(), s.getCategory(), s.getDate(), s.getHours(), s.getNotes(), s.getTopic());
+    }
+
+    public StudyResponsedto updateById(Long id,StudyRequestdto request){
+        StudyLog s=str.findById(id).orElseThrow(()->new ResourceNotFound("Not found with id:"+id));
+        s.setCategory(request.getCategory());
+        s.setDate(request.getDate());
+        s.setHours(request.getHours());
+        s.setTopic(request.getTopic());
+        s.setNotes(request.getNotes());
+        StudyLog study=str.save(s);
+        return new StudyResponsedto(study.getId(), study.getCategory(), study.getDate(),s.getHours(), study.getNotes(), study.getTopic());
+    }
 }

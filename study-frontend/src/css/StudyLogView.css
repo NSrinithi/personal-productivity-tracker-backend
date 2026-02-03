@@ -1,0 +1,93 @@
+/* Page */
+.studyViewContainer {
+    min-height: 100vh;
+    background: #f4f7fb;
+    padding: 32px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Title */
+.studyViewContainer h1 {
+    font-size: 28px;
+    font-weight: 600;
+    color: #203a43;
+    margin-bottom: 24px;
+}
+
+/* Empty state */
+.emptyText {
+    color: #6b7280;
+    font-size: 15px;
+}
+
+/* Log card */
+.studyLogCard {
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 20px 24px;
+    margin-bottom: 18px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+/* Text rows */
+.studyLogCard p {
+    margin: 6px 0;
+    font-size: 14px;
+    color: #1f2937;
+}
+
+.studyLogCard b {
+    color: #374151;
+}
+
+/* Button group */
+.actionButtons {
+    margin-top: 12px;
+    display: flex;
+    gap: 10px;
+}
+
+/* Buttons */
+.editBtn,
+.deleteBtn {
+    padding: 8px 14px;
+    font-size: 13px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background 0.3s, transform 0.2s;
+}
+
+/* Edit */
+.editBtn {
+    background: #e0f2fe;
+    color: #075985;
+}
+
+.editBtn:hover {
+    background: #bae6fd;
+    transform: translateY(-1px);
+}
+
+/* Delete */
+.deleteBtn {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.deleteBtn:hover {
+    background: #fecaca;
+    transform: translateY(-1px);
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+    .studyViewContainer {
+        padding: 20px;
+    }
+
+    .studyLogCard {
+        padding: 16px;
+    }
+}

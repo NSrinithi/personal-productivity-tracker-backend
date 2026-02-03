@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,7 +17,6 @@ import com.example.backend.dto.StudyRequestdto;
 import com.example.backend.dto.StudyResponsedto;
 import com.example.backend.service.StudyLogService;
 
-
 import java.util.*;
 
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,11 +27,14 @@ import com.example.backend.dto.DaySummaryDto;
 import com.example.backend.dto.MonthlySummaryDto;
 import com.example.backend.dto.StreakDto;
 import com.example.backend.dto.WeeklySummaryDto;
+import com.example.backend.entity.StudyLog;
 import com.example.backend.service.DashService;
 import com.example.backend.service.StreakService;
 import com.example.backend.service.SummaryService;
 
 import jakarta.validation.Valid;
+import org.springframework.web.bind.annotation.PutMapping;
+
 
 
 
@@ -55,7 +58,7 @@ public class StudyLogController {
 
     @PostMapping()
     public ResponseEntity<StudyResponsedto> add(@Valid @RequestBody StudyRequestdto s) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(sls.create(s));
+        return ResponseEntity.status(HttpStatus.OK).body(sls.create(s));
     }
 
     @GetMapping()
@@ -67,6 +70,24 @@ public class StudyLogController {
     public ResponseEntity<List<StudyResponsedto>> getByidDate(@RequestParam @DateTimeFormat(iso=DateTimeFormat.ISO.DATE) LocalDate date) {
         return ResponseEntity.ok(sls.getByDate(date));
     }
+
+
+    @GetMapping("/{id}")
+    public ResponseEntity<StudyResponsedto> getById(@PathVariable long id) {
+        return ResponseEntity.ok(sls.getById(id));
+    }
+    
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteByid(@PathVariable long id) {
+        return ResponseEntity.ok(sls.deleteStudyLog(id));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<StudyResponsedto> update(@PathVariable Long id, @RequestBody StudyRequestdto s) {
+       return ResponseEntity.ok(sls.updateById(id, s));
+    }
+    
 
     @GetMapping("/category/{category}")
     public ResponseEntity<List<StudyResponsedto>> searchByCategory(@PathVariable String category) {

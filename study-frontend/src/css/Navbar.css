@@ -1,0 +1,77 @@
+.navbar {
+    height: 64px;
+    background: #ffffff;
+    padding: 0 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.navLeft {
+    font-size: 20px;
+    font-weight: 600;
+    color: #203a43;
+    cursor: pointer;
+}
+
+/* Right section */
+.navRight {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Dropdown */
+.dropdown {
+    position: relative;
+}
+
+.dropBtn {
+    background: none;
+    border: none;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    color: #1f2937;
+}
+
+.dropdownMenu {
+    position: absolute;
+    top: 36px;
+    right: 0;
+    background: #ffffff;
+    color: black;
+    border-radius: 10px;
+    min-width: 180px;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+    overflow: hidden;
+    z-index: 10;
+}
+
+.dropdownMenu div {
+    padding: 12px 16px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.dropdownMenu div:hover {
+    background: #f1f5f9;
+}
+
+/* Logout */
+.logoutBtn {
+    padding: 8px 14px;
+    background: #fee2e2;
+    color: #991b1b;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.logoutBtn:hover {
+    background: #fecaca;
+}
