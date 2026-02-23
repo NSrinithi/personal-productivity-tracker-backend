@@ -1,32 +1,23 @@
 package com.example.backend.service;
 
-import java.time.DayOfWeek;
 import java.time.LocalDate;
-import java.time.YearMonth;
-import java.time.temporal.TemporalAdjusters;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
-import com.example.backend.dto.DailySummaryDto;
-import com.example.backend.dto.DashBoardDto;
-import com.example.backend.dto.DaySummaryDto;
-import com.example.backend.dto.MonthlySnapDto;
-import com.example.backend.dto.MonthlySummaryDto;
-import com.example.backend.dto.StreakDto;
 import com.example.backend.dto.StudyRequestdto;
 import com.example.backend.dto.StudyResponsedto;
-import com.example.backend.dto.WeeklySnapDto;
-import com.example.backend.dto.WeeklySummaryDto;
 import com.example.backend.entity.StudyLog;
 import com.example.backend.entity.User;
 import com.example.backend.exception.ResourceNotFound;
 import com.example.backend.repo.StudyLogRepo;
 import com.example.backend.repo.UserRepo;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+
 
 @Service
 public class StudyLogService {
@@ -36,6 +27,13 @@ public class StudyLogService {
     public StudyLogService(StudyLogRepo str,UserRepo ur) {
         this.str = str;
         this.ur=ur;
+    }
+
+    public Page<StudyResponsedto> getByUser(int Page,int siZe){
+        String email=SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
+        User u=ur.findByEmail(email);
+        Pageable pageable=PageRequest.of(Page,siZe,Sort.by("date").descending());
+        return str.findByUser(u,pageable).map(x->new StudyResponsedto(x.getId(),x.getCategory(), x.getDate(), x.getHours(),x.getTopic(),x.getNotes()));
     }
 
     public StudyResponsedto create(StudyRequestdto s){
@@ -79,6 +77,7 @@ public class StudyLogService {
 
 
     public String deleteStudyLog(long id){
+        StudyLog study=str.findById(id).orElseThrow(()->new ResourceNotFound("Resource not found"));
         str.deleteById(id);
         return "Deleted successfully";
     }

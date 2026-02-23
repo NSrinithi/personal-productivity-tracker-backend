@@ -80,6 +80,9 @@
     background: #fecaca;
     transform: translateY(-1px);
 }
+span{
+    color: black;
+}
 
 /* Mobile */
 @media (max-width: 600px) {

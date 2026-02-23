@@ -5,10 +5,17 @@ import java.time.LocalDate;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.Index;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(
+    indexes={
+        @Index(name="idx_user_id",columnList="user_id")
+    }
+)
 public class StudyLog {
 
     @Id

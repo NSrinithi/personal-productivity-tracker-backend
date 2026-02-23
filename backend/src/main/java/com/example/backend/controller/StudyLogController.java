@@ -34,9 +34,7 @@ import com.example.backend.service.SummaryService;
 
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.PutMapping;
-
-
-
+import org.springframework.data.domain.Page;
 
 @RestController
 @RequestMapping("/study")
@@ -98,6 +96,12 @@ public class StudyLogController {
     public ResponseEntity<List<StudyResponsedto>> findByUser() {
         return ResponseEntity.ok(sls.findByuser());
     }
+
+    @GetMapping("/page")
+    public ResponseEntity<Page<StudyResponsedto>> findBy(@RequestParam(defaultValue="0") int page,@RequestParam(defaultValue="5") int siZe) {
+        return ResponseEntity.ok(sls.getByUser(page, siZe));
+    }
+    
 
     @GetMapping("/weekSummary")
     public ResponseEntity<WeeklySummaryDto> findByUser(@RequestParam @DateTimeFormat(iso=DateTimeFormat.ISO.DATE) LocalDate date) {

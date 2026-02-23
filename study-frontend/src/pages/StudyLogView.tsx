@@ -16,14 +16,18 @@ function StudyLogView(){
     const navigate=useNavigate();
 
     const[data,setdata]=useState<StudyView[]>([]);
-    const fetchData=async()=>{
+    const[page,setPage]=useState(0);
+    const[totalPage,setTotalPage]=useState(0);
+
+
+    const fetchData=async(page: number)=>{
             const token=localStorage.getItem("token");
             if (!token) {
                 navigate("/login");
                 return;
             }
             console.log("Token: "+token);
-            const res=await fetch("http://localhost:8080/study/user",{
+            const res=await fetch(`http://localhost:8080/study/page?page=${page}&size=5`,{
                 method:"GET",
                 headers:{
                     Authorization: "Bearer "+token
@@ -32,12 +36,15 @@ function StudyLogView(){
 
             const json=await res.json();
             console.log(json);
-            setdata(json);
+            setdata(json.content);
+            setPage(json.number);
+            setTotalPage(json.totalPages);
         }
     useEffect(()=>{
-        fetchData();
-    },[])
+        fetchData(page);
+    },[page])
 
+    
     
     const deleteRequest=async(id:number)=>{
         try {
@@ -48,7 +55,7 @@ function StudyLogView(){
             }
         },navigate)
         alert("Deleted successfully");
-        fetchData();
+        fetchData(page);
         } catch (error:any) {
             alert(error.message)
         }
@@ -80,6 +87,9 @@ function StudyLogView(){
       </div>
     </div>
   ))}
+  <button disabled={page===0} onClick={()=> setPage(page-1)}>Previous</button>
+  <span> Page {page + 1} of {totalPage} </span>
+  <button disabled={page+1>=totalPage} onClick={()=> setPage(page+1)}>Next</button>
 </div>
 </>
     )

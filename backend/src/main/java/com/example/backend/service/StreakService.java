@@ -41,7 +41,7 @@ public class StreakService {
         int currentRun=1;
         int max=1;
         LocalDate startingDate=sortedDate.get(0);
-        for(int i=0;i<sortedDate.size();i++){
+        for(int i=1;i<sortedDate.size();i++){
             LocalDate current=sortedDate.get(i);
             if(current.equals(startingDate.plusDays(1))){
                 currentRun++;
@@ -57,5 +57,37 @@ public class StreakService {
         streakDto.setLongestStreak(max);
         streakDto.setLastStudiedDate(sortedDate.get(sortedDate.size()-1));
         return streakDto;
+    }
+
+
+    public StreakDto getStreakForTesting(Set<LocalDate> dates){
+        if(dates==null || dates.isEmpty()) return new StreakDto(0, 0, null);
+
+        LocalDate today=LocalDate.now();
+        int currentStreak=0;
+        while(dates.contains(today)){
+            currentStreak++;
+            today=today.minusDays(1);
+        }
+
+        List<LocalDate> sorted_date=dates.stream().sorted().toList();
+        LocalDate starting_date=sorted_date.get(0);
+
+        int current_run=1;
+        int max=1;
+
+        for(int i=1;i<sorted_date.size();i++){
+            LocalDate current=sorted_date.get(i);
+            if(current.equals(starting_date.plusDays(1))){
+                current_run++;
+            }
+            else{
+                current_run=1;
+            }
+            max=Math.max(max,current_run);
+            starting_date=current;;
+        }
+        return new StreakDto(max, currentStreak, sorted_date.get(sorted_date.size()-1));
+
     }
 }
